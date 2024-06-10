@@ -19,26 +19,35 @@
         static void StartQuiz()
         {
             int Score = 0;
-            bool Ans ;
-            dynamic [,] QustAndAns = { { "Sharks are mammals?(True/False)", false },
-                                     { "The blue whale is the biggest animal to have ever lived?(True/False)", true },
-                                     { "Bats are blind?(True/False)", false },
-                                     { "Pigs roll in the mud because they don't like being clean?(True/False)", false },
-                                     { "Infants have more bones than adults?(True/False)", true } };
+            char Ans ;
+            dynamic [,] QustAndAns = { { "Sharks are mammals?(True/False)", 'F' },
+                                     { "The blue whale is the biggest animal to have ever lived?(True/False)", 'T' },
+                                     { "Bats are blind?(True/False)", 'F' },
+                                     { "Pigs roll in the mud because they don't like being clean?(True/False)", 'F' },
+                                     { "Infants have more bones than adults?(True/False)", 'T' } };
             try
             {
                 for (int i = 0; i < QustAndAns.Length / 2; i++)
                 {
                     Console.WriteLine(QustAndAns[i, 0]);
-                    Ans = bool.Parse(Console.ReadLine());
+                    Ans = char.ToUpper(char.Parse(Console.ReadLine().ToUpper()));
                     if (Ans == QustAndAns[i, 1])
                     {
                         Console.WriteLine("Right Answer");
                         Score += 5;
                     }
-                    else
-                    {
-                        Console.WriteLine("Wrong Answer");
+                    while (Ans != QustAndAns[i, 1]) {
+                        if (  Ans == 'T' || Ans == 'F')
+                        {
+                            Console.WriteLine("Wrong Answer");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You Should answer (T) for True and (F) For False only !!");
+                            Console.WriteLine(QustAndAns[i, 0]);
+                            Ans = char.ToUpper(char.Parse(Console.ReadLine().ToUpper()));
+                        }
                     }
                 }
                 Console.WriteLine("Your Score is : " + Score + "/25");
@@ -52,7 +61,6 @@
             {
                 Console.WriteLine(e.ToString());
             }
-           
         }
     }
 }
